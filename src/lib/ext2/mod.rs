@@ -1,3 +1,3 @@
 
-mod data;
-mod read;
+pub mod data;
+pub mod read;

@@ -43,8 +43,15 @@ impl BlockBitmap {
         }
     }
 }
-impl super::super::super::traits::IntoRaw for BlockBitmap {
+impl crate::lib::traits::IntoRaw for BlockBitmap {
     fn into_raw(&self) -> Box<&[u8]> {
         return Box::new(self.data.as_slice()); // borrow checker no skill issue
+    }
+}
+impl crate::lib::traits::FromBin for BlockBitmap {
+    fn read_from_bin(bin: &[u8]) -> Self {
+        return BlockBitmap {
+            data: bin.to_vec()
+        }
     }
 }

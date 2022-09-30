@@ -4,7 +4,7 @@ use std::fs::File;
 use std::io::BufReader;
 
 #[derive(Debug)]
-struct Ext2Image<'lifetime> {
+pub struct Ext2Image<'lifetime> {
     buffer: BufReader<File>, // file handle to the image file
     partition: super::data::partition::Partition<'lifetime>,
 }

@@ -44,8 +44,15 @@ impl InodeBitmap {
         }
     }
 }
-impl super::super::super::traits::IntoRaw for InodeBitmap {
+impl crate::lib::traits::IntoRaw for InodeBitmap {
     fn into_raw(&self) -> Box<&[u8]> {
         return Box::new(self.data.as_slice()); // borrow checker no skill issue
+    }
+}
+impl crate::lib::traits::FromBin for InodeBitmap {
+    fn read_from_bin(bin: &[u8]) -> Self {
+        return InodeBitmap {
+            data: bin.to_vec()
+        }
     }
 }
