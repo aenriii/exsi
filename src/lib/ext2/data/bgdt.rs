@@ -1,6 +1,6 @@
 
 pub type BlockGroupDescriptorTable = Vec<BlockGroupDescriptor>;
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 
 pub struct BlockGroupDescriptor {
     pub block_bitmap: u32,

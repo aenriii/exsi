@@ -1,3 +1,5 @@
+use std::io::Read;
+
 
 #[derive(Debug)]
 
@@ -52,6 +54,15 @@ impl crate::lib::traits::FromBin for BlockBitmap {
     fn read_from_bin(bin: &[u8]) -> Self {
         return BlockBitmap {
             data: bin.to_vec()
+        }
+    }
+}
+impl crate::lib::traits::ReadFrom for BlockBitmap {
+    fn read(reader: &mut std::io::BufReader<std::fs::File>, block_size: u32, superblock: &super::superblock::Superblock) -> Self {
+        let mut data = vec![0; block_size as usize];
+        reader.read_exact(&mut data).unwrap();
+        return BlockBitmap {
+            data: data
         }
     }
 }

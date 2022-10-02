@@ -1,3 +1,5 @@
+use std::io::{Seek, Read};
+
 
 #[derive(Debug)]
 
@@ -49,10 +51,12 @@ impl crate::lib::traits::IntoRaw for InodeBitmap {
         return Box::new(self.data.as_slice()); // borrow checker no skill issue
     }
 }
-impl crate::lib::traits::FromBin for InodeBitmap {
-    fn read_from_bin(bin: &[u8]) -> Self {
+impl crate::lib::traits::ReadFrom for InodeBitmap {
+    fn read(reader: &mut std::io::BufReader<std::fs::File>, block_size: u32, superblock: &super::superblock::Superblock) -> Self {
+        let mut data = vec![0; block_size as usize];
+        reader.read_exact(&mut data).unwrap();
         return InodeBitmap {
-            data: bin.to_vec()
+            data: data
         }
     }
 }

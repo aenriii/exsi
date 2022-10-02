@@ -4,11 +4,11 @@ use std::fs::File;
 use std::io::BufReader;
 
 #[derive(Debug)]
-pub struct Ext2Image<'lifetime> {
+pub struct Ext2Image {
     buffer: BufReader<File>, // file handle to the image file
-    partition: super::data::partition::Partition<'lifetime>,
+    partition: super::data::partition::Partition,
 }
-impl <'lifetime> Ext2Image<'lifetime> {
+impl Ext2Image {
     pub fn new(filename: &str) -> Self {
         let file = File::open(filename).expect(
             format!("Failed to open file {}", filename).as_str()
